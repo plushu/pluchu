@@ -7,6 +7,8 @@
 
 # The name of the user / remote.
 # Changing this to "dokku" will make a client script for dokku.
+# (If making a client script for Dokku, you'll probably also want to disable
+# the implicit "--app" below.)
 servname="plushu"
 
 # Set the "REMOTE" variable according to any "remote" command-line arg.
@@ -42,7 +44,7 @@ fi
 host=${remote_url%:*}
 
 # The name of the app to implicitly define via the "--app" option.
-# Undefine this to disable.
+# Undefine this to disable. (Not supported by Dokku.)
 APP=${APP-${remote_url##*:}}
 
 if [[ -n "$APP" ]]; then
