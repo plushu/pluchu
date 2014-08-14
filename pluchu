@@ -38,6 +38,15 @@ if [[ "${remote_url%%@*}" != "$servname" ]]; then
   exit 1
 fi
 
-host=${remote_url%%:*}
+# The hostname to connect to.
+host=${remote_url%:*}
+
+# The name of the app to implicitly define via the "--app" option.
+# Undefine this to disable.
+APP=${APP-${remote_url##*:}}
+
+if [[ -n "$APP" ]]; then
+  set -- "--app=$APP" "$@"
+fi
 
 ssh "$host" "$@"
